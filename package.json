@@ -11,7 +11,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged && concurrently npm:test npm:lint"
+      "pre-commit": "pretty-quick --staged"
     }
   },
   "devDependencies": {
@@ -60,6 +60,10 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@types/yup": "^0.29.3",
+    "react-hook-form": "^6.0.1",
+    "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   }

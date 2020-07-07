@@ -1,4 +1,4 @@
-import { EventState, ActionsEvent } from "../../actions/events/actionTypes";
+import { EventState, ActionsEvent } from "../../actions/event/actionTypes";
 
 const initialState: EventState = {
   data: [],
