@@ -16,11 +16,10 @@ export const DateInput = ({ register, label, name }: any) => {
     <div className={classes.inputContainer}>
       <label>{label}</label>
       <Input
-        name={name}
         inputRef={register}
         type="date"
         required
-        inputProps={{ min: new Date().toISOString().split("T")[0] }}
+        inputProps={{ name, min: new Date().toISOString().split("T")[0] }}
       />
     </div>
   );

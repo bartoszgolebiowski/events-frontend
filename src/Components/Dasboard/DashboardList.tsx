@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Card from "@material-ui/core/Card/Card";
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
 import List from "@material-ui/core/List/List";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { RootState } from "../../Redux/reducers/rootReducer";
+import { getEvents } from "../../Services/events";
+import { fetchEventsAction } from "../../Redux/actions/event/fetchActions";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -45,63 +47,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const items: any[] = [
-  {
-    id: "1",
-    firstName: "Jan",
-    lastName: "Kowalski",
-    email: "jan.kowalski@gmail.com",
-    date: new Date(),
-  },
-  {
-    id: "1",
-    firstName: "Jan",
-    lastName: "Kowalski",
-    email: "jan.kowalski@gmail.com",
-    date: new Date(),
-  },
-  {
-    id: "1",
-    firstName: "Jan",
-    lastName: "Kowalski",
-    email: "jan.kowalski@gmail.com",
-    date: new Date(),
-  },
-  {
-    id: "1",
-    firstName: "Jan",
-    lastName: "Kowalski",
-    email: "jan.kowalski@gmail.com",
-    date: new Date(),
-  },
-  {
-    id: "1",
-    firstName: "Jan",
-    lastName: "Kowalski",
-    email: "jan.kowalski@gmail.com",
-    date: new Date(),
-  },
-  {
-    id: "1",
-    firstName: "Adam",
-    lastName: "Nowak",
-    email: "adam.nowak@gmail.com",
-    date: new Date(),
-  },
-  {
-    id: "1",
-    firstName: "John",
-    lastName: "Snow",
-    email: "john.snow@gmail.com",
-    date: new Date(),
-  },
-];
-
 export const DashboardList = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { loading, error, data } = useSelector(
     (state: RootState) => state.eventReducer
   );
+
+  useEffect(() => {
+    dispatch(fetchEventsAction(() => getEvents()));
+  }, []);
 
   if (loading)
     return (
@@ -134,11 +89,14 @@ export const DashboardList = () => {
   return (
     <Card className={classes.card}>
       <List className={classes.list}>
-        {data.map((item) => (
+        {data.map((item, index) => (
           <ListItemText
+            data-cy={`event-${index}`}
             key={item.id}
             primary={`${item.firstName} ${item.lastName}`}
-            secondary={`${item.email} ${item.date.toLocaleDateString()}`}
+            secondary={`${item.email} ${new Date(
+              item.date
+            ).toLocaleDateString()}`}
           />
         ))}
       </List>

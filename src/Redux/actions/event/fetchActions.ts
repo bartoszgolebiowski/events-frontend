@@ -1,8 +1,16 @@
 import { AnyAction, Dispatch } from "redux";
-import { FETCH_ERROR, FETCH, FETCH_LOADING } from "./actionTypes";
+import { FETCH_ERROR, FETCH, FETCH_LOADING, APPEND } from "./actionTypes";
+import { EventObj, EventResponse } from "../../../Models/events/types";
 
-const saveEventsAction = (data: any) => ({
+const saveEventsAction = (data: EventObj[]) => ({
   type: FETCH,
+  payload: {
+    data,
+  },
+});
+
+export const appendEventAction = (data: EventResponse) => ({
+  type: APPEND,
   payload: {
     data,
   },

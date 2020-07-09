@@ -16,7 +16,12 @@ const reducer = (state = initialState, action: ActionsEvent) => {
         error: false,
       };
     }
-
+    case "APPEND": {
+      return {
+        ...state,
+        data: [action.payload.data, ...state.data],
+      };
+    }
     case "FETCH_LOADING": {
       return {
         ...state,

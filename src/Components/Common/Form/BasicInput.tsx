@@ -16,7 +16,7 @@ export const BasicInput = ({ register, label, name, type, min }: any) => {
   return (
     <div className={classes.inputContainer}>
       <label>{label}</label>
-      <Input name={name} inputRef={register} type={type} required />
+      <Input inputRef={register} type={type} required inputProps={{ name }} />
     </div>
   );
 };
